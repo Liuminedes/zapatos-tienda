@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ASFALTO — Calzado urbano premium</title>
+  <meta name="description" content="Tenis, botas y chelsea de edición limitada. Urbano de día, elegante de noche.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Íconos reutilizables -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.6 3.8 4.5 7 4.5c2 0 3.3 1.1 5 3 1.7-1.9 3-3 5-3 3.2 0 5.3 3.1 4.2 6.2C19.5 15.4 12 20 12 20z" fill="var(--heart-fill, none)" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="18" r="2" fill="var(--bg)" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="18" r="2" fill="var(--bg)" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-return" viewBox="0 0 24 24"><path d="M4 9h11a5 5 0 010 10H8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 5L4 9l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/></symbol>
+  </svg>
+
+  <div class="announce" id="announce"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#" class="logo">ASFALTO<span>®</span></a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#catalogo" data-goto="todo">Novedades</a>
+        <a href="#catalogo" data-goto="tenis">Tenis</a>
+        <a href="#catalogo" data-goto="altos">Altos</a>
+        <a href="#catalogo" data-goto="botas">Botas</a>
+        <a href="#catalogo" data-goto="chelsea">Chelsea</a>
+        <a href="#catalogo" data-goto="ofertas" class="sale">Ofertas</a>
+      </nav>
+      <div class="nav-icons">
+        <button class="icon-btn" id="searchBtn" aria-label="Buscar"><svg><use href="#i-search"/></svg></button>
+        <button class="icon-btn" id="favBtn" aria-label="Ver favoritos"><svg><use href="#i-heart"/></svg><span class="dot" id="favCount" hidden>0</span></button>
+        <button class="icon-btn hide-sm" id="userBtn" aria-label="Mi cuenta"><svg><use href="#i-user"/></svg></button>
+        <button class="icon-btn" id="openCart" aria-label="Abrir carrito"><svg><use href="#i-bag"/></svg><span class="dot" id="cartCount" hidden>0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="wrap">
+      <div class="hero">
+        <div class="hero-bg" aria-hidden="true">ASFALTO</div>
+        <div class="hero-copy">
+          <p class="eyebrow" id="heroEyebrow"></p>
+          <h1 id="heroTitle"></h1>
+          <p class="lead" id="heroLead"></p>
+          <div class="hero-cta">
+            <a href="#catalogo" class="btn btn-primary">Comprar ahora</a>
+            <a href="#drop" class="btn btn-ghost">Ver el drop</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="hero-disc" aria-hidden="true"></div>
+          <div class="hero-shoe" id="heroShoe"></div>
+          <button class="hero-tag" id="heroTag"></button>
+        </div>
+      </div>
+
+      <ul class="trust">
+        <li><svg><use href="#i-truck"/></svg><div><b>Envío gratis</b><span id="trustShip"></span></div></li>
+        <li><svg><use href="#i-return"/></svg><div><b>Cambios en 30 días</b><span>Guía prepagada incluida</span></div></li>
+        <li><svg><use href="#i-card"/></svg><div><b id="trustInst"></b><span>Tarjetas, PSE y Addi</span></div></li>
+        <li><svg><use href="#i-lock"/></svg><div><b>Pago seguro</b><span>Cifrado SSL de extremo a extremo</span></div></li>
+      </ul>
+    </section>
+
+    <!-- Categorías -->
+    <section class="wrap section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Compra por categoría</p>
+          <h2>Encuentra tu par.</h2>
+        </div>
+      </div>
+      <div class="cats" id="cats"></div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="wrap section" id="catalogo">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Catálogo</p>
+          <h2>Todo el par.</h2>
+        </div>
+        <p class="muted" id="resultCount"></p>
+      </div>
+
+      <div class="toolbar">
+        <div class="chips" id="filters" role="tablist" aria-label="Categorías"></div>
+        <div class="toolbar-right">
+          <label class="search">
+            <svg><use href="#i-search"/></svg>
+            <span class="sr-only">Buscar productos</span>
+            <input id="search" type="search" placeholder="Buscar modelo o color">
+          </label>
+          <label class="sort">
+            <span class="sr-only">Ordenar</span>
+            <select id="sort">
+              <option value="feat">Destacados</option>
+              <option value="asc">Precio: menor a mayor</option>
+              <option value="desc">Precio: mayor a menor</option>
+              <option value="rating">Mejor valorados</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- Editorial -->
+    <section class="wrap section" id="drop">
+      <div class="editorial">
+        <div class="editorial-copy">
+          <p class="eyebrow" id="edEyebrow"></p>
+          <h2 id="edTitle"></h2>
+          <p id="edText"></p>
+          <ul class="specs">
+            <li><b>Cuero plena flor</b><span>Curtido vegetal</span></li>
+            <li><b>Suela de caucho</b><span>Cosido Blake</span></li>
+            <li><b>300 pares</b><span>Numerados</span></li>
+          </ul>
+          <button class="btn btn-dark" id="edBtn"></button>
+        </div>
+        <div class="editorial-art" id="editorialShoe"></div>
+      </div>
+    </section>
+
+    <!-- Reseñas -->
+    <section class="wrap section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Reseñas</p>
+          <h2>Lo dice la calle.</h2>
+        </div>
+        <p class="rating-big"><b>4.8</b> <span class="stars" aria-hidden="true">★★★★★</span> <span class="muted">· 1,240 reseñas verificadas</span></p>
+      </div>
+      <div class="reviews">
+        <figure><span class="stars">★★★★★</span><blockquote>“Los uso diario para ir a la oficina y en la noche. La piel ya tomó la forma del pie y se ven mejor que el primer día.”</blockquote><figcaption><b>Daniela R.</b> · Distrito Chelsea, Café</figcaption></figure>
+        <figure><span class="stars">★★★★★</span><blockquote>“La talla es exacta y el envío llegó en dos días. La caja y los detalles se sienten de marca cara.”</blockquote><figcaption><b>Jorge M.</b> · Asfalto 02 High, Noche</figcaption></figure>
+        <figure><span class="stars">★★★★☆</span><blockquote>“Pesadas al inicio, pero aguantan lluvia y concreto sin problema. Las volvería a comprar en negro.”</blockquote><figcaption><b>Luis A.</b> · Bloque Boot, Tabaco</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="wrap section">
+      <div class="newsletter">
+        <div>
+          <p class="eyebrow">Club Asfalto</p>
+          <h2>10% en tu primera compra.</h2>
+          <p class="muted">Acceso anticipado a cada drop y avisos de reposición. Nada de spam.</p>
+        </div>
+        <form id="newsForm">
+          <label class="sr-only" for="email">Correo</label>
+          <input id="email" type="email" required placeholder="tu@correo.com">
+          <button class="btn btn-primary">Suscribirme</button>
+          <p class="news-msg" id="newsMsg" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-cols">
+        <div class="footer-brand">
+          <span class="logo">ASFALTO<span>®</span></span>
+          <p class="muted" id="footerText"></p>
+        </div>
+        <div><h4>Tienda</h4><a href="#catalogo" data-goto="tenis">Tenis</a><a href="#catalogo" data-goto="altos">Altos</a><a href="#catalogo" data-goto="botas">Botas</a><a href="#catalogo" data-goto="chelsea">Chelsea</a></div>
+        <div><h4>Ayuda</h4><a href="#">Envíos</a><a href="#">Cambios y devoluciones</a><a href="#">Guía de tallas</a><a href="#">Preguntas frecuentes</a></div>
+        <div><h4>Estudio</h4><a href="#">Nosotros</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Contacto</a><a href="admin/">Panel admin (demo)</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Asfalto Estudio · Tienda de demostración</span>
+        <ul class="pay" aria-label="Métodos de pago"><li>Visa</li><li>Mastercard</li><li>AMEX</li><li>PSE</li><li>Nequi</li><li>Addi</li></ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detalle de producto -->
+  <dialog id="product" class="product">
+    <button class="close" data-close aria-label="Cerrar">✕</button>
+    <div class="product-gallery">
+      <div class="product-art" id="pArt"></div>
+      <div class="thumbs" id="pThumbs"></div>
+    </div>
+    <div class="product-info">
+      <p class="eyebrow" id="pCat"></p>
+      <h2 id="pName"></h2>
+      <p class="p-rating" id="pRating"></p>
+      <p class="price" id="pPrice"></p>
+      <p class="p-desc" id="pDesc"></p>
+      <p class="p-material" id="pMaterial"></p>
+      <p class="label">Color: <span class="muted" id="pColor"></span></p>
+      <div class="swatches lg" id="pSwatches"></div>
+      <p class="label">Talla (COL) <button class="link" id="sizeGuide">Guía de tallas</button></p>
+      <div class="sizes" id="pSizes"></div>
+      <p class="p-stock" id="pStock"></p>
+      <div class="buy-row">
+        <button class="btn btn-primary" id="pAdd" disabled>Elige tu talla</button>
+        <button class="icon-btn outline" id="pFav" aria-label="Agregar a favoritos" aria-pressed="false"><svg><use href="#i-heart"/></svg></button>
+      </div>
+      <ul class="p-perks">
+        <li><svg><use href="#i-truck"/></svg>Envío gratis · llega en 24–72 h</li>
+        <li><svg><use href="#i-return"/></svg>Cambios sin costo durante 30 días</li>
+        <li><svg><use href="#i-card"/></svg>Paga en <span id="pInstN"></span> cuotas de <b id="pMsi"></b></li>
+      </ul>
+    </div>
+  </dialog>
+
+  <!-- Carrito -->
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="cart" id="cart" aria-label="Carrito" aria-hidden="true">
+    <div class="cart-head">
+      <h2>Tu carrito</h2>
+      <button class="close" id="closeCart" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="ship-bar"><p id="shipNote"></p><div class="bar"><i id="shipFill"></i></div></div>
+    <ul class="cart-items" id="cartItems"></ul>
+    <div class="cart-foot">
+      <div class="row"><span>Subtotal</span><b id="cartTotal">$0</b></div>
+      <p class="muted small">Impuestos incluidos. Envío calculado al pagar.</p>
+      <button class="btn btn-primary full" id="checkout">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="data.js"></script>
+  <script src="shoes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

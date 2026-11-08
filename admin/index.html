@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel admin — ASFALTO</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <aside class="side">
+    <a href="../" class="logo" id="brandLogo">ASFALTO<span>®</span></a>
+    <span class="side-tag">Panel admin</span>
+    <nav class="side-nav" id="sideNav">
+      <button data-view="dash" aria-current="true"><i>◧</i>Resumen</button>
+      <button data-view="products"><i>◫</i>Productos</button>
+      <button data-view="orders"><i>☰</i>Pedidos</button>
+      <button data-view="content"><i>✎</i>Contenido</button>
+      <button data-view="look"><i>◐</i>Apariencia</button>
+    </nav>
+    <div class="side-foot">
+      <a href="../" target="_blank" class="btn btn-ghost full">Ver tienda ↗</a>
+      <p>Demo sin login: los cambios se guardan en este navegador.</p>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <h1 id="viewTitle">Resumen</h1>
+      <div class="top-actions">
+        <button class="btn btn-ghost" id="exportBtn">Exportar JSON</button>
+        <label class="btn btn-ghost">Importar JSON<input type="file" id="importFile" accept="application/json" hidden></label>
+        <button class="btn btn-ghost danger" id="resetBtn">Restablecer demo</button>
+      </div>
+    </header>
+
+    <!-- Resumen -->
+    <section class="view" id="view-dash">
+      <div class="kpis" id="kpis"></div>
+      <div class="two">
+        <div class="panel">
+          <div class="panel-head"><h2>Ventas últimos 7 días</h2><span class="muted small">Datos de ejemplo</span></div>
+          <div class="bars" id="salesChart"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Stock bajo</h2><button class="link" data-view="products">Ver todo</button></div>
+          <ul class="mini-list" id="lowStock"></ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Últimos pedidos</h2><button class="link" data-view="orders">Ver todos</button></div>
+        <div class="table-wrap"><table class="table" id="recentOrders"></table></div>
+      </div>
+    </section>
+
+    <!-- Productos -->
+    <section class="view" id="view-products" hidden>
+      <div class="toolbar">
+        <input type="search" id="pSearch" placeholder="Buscar producto, color o material">
+        <select id="pCatFilter"><option value="">Todas las categorías</option></select>
+        <button class="btn btn-primary" id="newProduct">+ Nuevo producto</button>
+      </div>
+      <div class="panel flush"><div class="table-wrap"><table class="table" id="productTable"></table></div></div>
+    </section>
+
+    <!-- Pedidos -->
+    <section class="view" id="view-orders" hidden>
+      <div class="panel flush"><div class="table-wrap"><table class="table" id="orderTable"></table></div></div>
+      <p class="muted small note">Pedidos de demostración. Con una pasarela real (Wompi, PayU, Mercado Pago) llegarían aquí automáticamente.</p>
+    </section>
+
+    <!-- Contenido -->
+    <section class="view" id="view-content" hidden>
+      <form class="panel form" id="contentForm">
+        <h2>Barra de anuncio</h2>
+        <label>Texto<input name="announce"></label>
+        <div class="row">
+          <label>Envío gratis desde (COP)<input name="freeShip" type="number" min="0" step="1000"></label>
+          <label>Cuotas sin interés<input name="installments" type="number" min="1" max="36"></label>
+        </div>
+
+        <h2>Portada (hero)</h2>
+        <label>Texto pequeño superior<input name="heroEyebrow"></label>
+        <label>Título <small>Encierra una palabra entre *asteriscos* para resaltarla</small><input name="heroTitle"></label>
+        <label>Descripción<textarea name="heroLead" rows="3"></textarea></label>
+        <label>Producto destacado<select name="heroProduct" class="product-select"></select></label>
+
+        <h2>Bloque editorial</h2>
+        <label>Texto pequeño superior<input name="editorialEyebrow"></label>
+        <label>Título<input name="editorialTitle"></label>
+        <label>Texto<textarea name="editorialText" rows="3"></textarea></label>
+        <label>Producto<select name="editorialProduct" class="product-select"></select></label>
+
+        <h2>Footer</h2>
+        <label>Descripción de marca<textarea name="footerText" rows="2"></textarea></label>
+        <div class="form-actions"><button class="btn btn-primary">Guardar contenido</button></div>
+      </form>
+    </section>
+
+    <!-- Apariencia -->
+    <section class="view" id="view-look" hidden>
+      <form class="panel form" id="lookForm">
+        <h2>Marca</h2>
+        <label>Nombre de la tienda<input name="brand" required></label>
+        <h2>Color de acento</h2>
+        <div class="accent-row">
+          <input type="color" name="accent" id="accentInput">
+          <div class="presets" id="presets"></div>
+        </div>
+        <div class="accent-preview" id="accentPreview">
+          <span class="ap-bar">Barra de anuncio</span>
+          <span class="ap-btn">Comprar ahora</span>
+          <span class="ap-badge">-20%</span>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary">Guardar apariencia</button></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Editor de producto -->
+  <dialog class="editor" id="editor">
+    <form id="productForm">
+      <header class="editor-head">
+        <h2 id="editorTitle">Editar producto</h2>
+        <button type="button" class="x" data-close aria-label="Cerrar">✕</button>
+      </header>
+      <div class="editor-body">
+        <div class="editor-preview">
+          <div class="preview-art" id="previewArt"></div>
+          <p class="preview-name" id="previewName"></p>
+          <p class="preview-price" id="previewPrice"></p>
+          <label class="switch"><input type="checkbox" name="active"> Visible en la tienda</label>
+        </div>
+        <div class="editor-fields">
+          <fieldset>
+            <legend>Información</legend>
+            <div class="row">
+              <label>Nombre<input name="name" required></label>
+              <label>Color / variante<input name="colorway" required></label>
+            </div>
+            <div class="row">
+              <label>Categoría<select name="cat"><option value="tenis">Tenis</option><option value="altos">Altos</option><option value="botas">Botas</option><option value="chelsea">Chelsea</option></select></label>
+              <label>Etiqueta <small>opcional</small><input name="tag" placeholder="Nuevo, Drop 07…"></label>
+            </div>
+            <label>Descripción<textarea name="desc" rows="3"></textarea></label>
+            <label>Materiales<input name="material" placeholder="Cuero plena flor · suela de caucho"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Precio e inventario</legend>
+            <div class="row three">
+              <label>Precio (COP)<input name="price" type="number" min="0" step="100" required></label>
+              <label>Precio anterior <small>oferta</small><input name="was" type="number" min="0" step="100"></label>
+              <label>Stock<input name="stock" type="number" min="0" required></label>
+            </div>
+            <p class="field-label">Tallas disponibles (COL)</p>
+            <div class="size-picks" id="sizePicks"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Imagen</legend>
+            <div class="row">
+              <label>Subir foto <small>PNG sin fondo ideal</small><input type="file" id="imgFile" accept="image/*"></label>
+              <label>…o URL de imagen<input name="img" placeholder="https://…/zapato.png"></label>
+            </div>
+            <button type="button" class="link" id="clearImg">Quitar imagen y usar ilustración</button>
+            <div class="row">
+              <label>Silueta de ilustración<select name="type"><option value="low">Tenis bajo</option><option value="high">Tenis alto</option><option value="boot">Bota</option><option value="chelsea">Chelsea</option></select></label>
+            </div>
+            <p class="field-label">Colores de la ilustración</p>
+            <div class="colors" id="colorPicks"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Reseñas</legend>
+            <div class="row">
+              <label>Calificación<input name="rating" type="number" min="0" max="5" step="0.1"></label>
+              <label>Nº de reseñas<input name="reviews" type="number" min="0"></label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <footer class="editor-foot">
+        <button type="button" class="btn btn-ghost danger" id="deleteProduct">Eliminar</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+        <button class="btn btn-primary">Guardar producto</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="../data.js"></script>
+  <script src="../shoes.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
