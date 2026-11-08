@@ -20,7 +20,8 @@ const store = {
 function applySite() {
   document.documentElement.style.setProperty('--accent', SITE.accent);
   document.title = `${SITE.brand} — Calzado urbano premium`;
-  document.querySelectorAll('.logo').forEach((l) => { l.innerHTML = `${esc(SITE.brand)}<span>®</span>`; });
+  $('#heroBg').textContent = SITE.brand.trim().split(/\s+/)[0];
+  document.querySelectorAll('.logo').forEach((l) => { l.innerHTML = logoHTML(SITE.brand); });
   $('#announce').textContent = SITE.announce;
   $('#heroEyebrow').textContent = SITE.heroEyebrow;
   $('#heroTitle').innerHTML = esc(SITE.heroTitle).replace(/\*(.+?)\*/g, '<em>$1</em>');
@@ -47,10 +48,10 @@ function applySite() {
 }
 
 // ---------- Favoritos ----------
-let favs = new Set(store.get('asfalto-favs', []).filter(byId));
+let favs = new Set(store.get('zypher-favs', []).filter(byId));
 function toggleFav(id) {
   favs.has(id) ? favs.delete(id) : favs.add(id);
-  store.set('asfalto-favs', [...favs]);
+  store.set('zypher-favs', [...favs]);
   renderFavCount();
   renderFilters();
   renderGrid();
@@ -205,14 +206,14 @@ document.addEventListener('click', (e) => {
 });
 
 // ---------- Carrito ----------
-let cart = store.get('asfalto-cart', []).filter((i) => byId(i.id));
+let cart = store.get('zypher-cart', []).filter((i) => byId(i.id));
 const subtotal = (items) => items.reduce((t, i) => t + byId(i.id).price * i.qty, 0);
 
 function addToCart(id, s) {
   const hit = cart.find((i) => i.id === id && i.size === s);
   if (hit) hit.qty++;
   else cart.push({ id, size: s, qty: 1 });
-  store.set('asfalto-cart', cart);
+  store.set('zypher-cart', cart);
   renderCart();
 }
 
@@ -246,7 +247,7 @@ $('#cartItems').addEventListener('click', (e) => {
     const i = cart[b.dataset.q];
     i.qty += Number(b.dataset.d);
     if (i.qty <= 0) cart.splice(b.dataset.q, 1);
-    store.set('asfalto-cart', cart);
+    store.set('zypher-cart', cart);
     renderCart();
   }
   if (e.target.closest('[data-close-cart]')) toggleCart(false);

@@ -7,7 +7,7 @@ const MEN = [38, 39, 40, 41, 42, 43, 44];
 
 const DEFAULT_DATA = {
   site: {
-    brand: 'ASFALTO',
+    brand: 'Zypher Sport Shop',
     accent: '#ff4d1a',
     announce: 'Envío gratis en compras desde $300.000 · Paga hasta en 6 cuotas sin interés',
     freeShip: 300000,
@@ -23,11 +23,11 @@ const DEFAULT_DATA = {
     footerText: 'Calzado urbano premium hecho en Colombia. Ediciones cortas, materiales nobles.',
   },
   products: [
-    { id: 'a1', name: 'Asfalto 01 Low', cat: 'tenis', type: 'low', price: 459900, tag: 'Nuevo', colorway: 'Hueso / Señal', rating: 4.9, reviews: 312, stock: 42, active: true,
+    { id: 'a1', name: 'Zypher 01 Low', cat: 'tenis', type: 'low', price: 459900, tag: 'Nuevo', colorway: 'Hueso / Señal', rating: 4.9, reviews: 312, stock: 42, active: true,
       material: 'Cuero plena flor · forro textil · suela vulcanizada de caucho', sizes: SIZES_COL,
       desc: 'Low-top de cuero con plantilla de memoria y suela vulcanizada. El par de todos los días.',
       c: { upper: '#f1ede6', panel: '#d6cfc2', accent: '#ff4d1a', mid: '#ffffff', sole: '#1a1a1a', lace: '#f1ede6' } },
-    { id: 'a2', name: 'Asfalto 02 High', cat: 'altos', type: 'high', price: 589900, tag: 'Drop 07', colorway: 'Noche / Señal', rating: 4.8, reviews: 204, stock: 18, active: true,
+    { id: 'a2', name: 'Zypher 02 High', cat: 'altos', type: 'high', price: 589900, tag: 'Drop 07', colorway: 'Noche / Señal', rating: 4.8, reviews: 204, stock: 18, active: true,
       material: 'Gamuza y cuero · collar acolchado · suela de caucho goma', sizes: SIZES_COL,
       desc: 'Bota de cancha con collar acolchado y parche de tobillo. Soporte y actitud.',
       c: { upper: '#1c1c1c', panel: '#2e2e2e', accent: '#ff4d1a', mid: '#f1ede6', sole: '#8a5a2b', lace: '#f1ede6' } },
@@ -39,7 +39,7 @@ const DEFAULT_DATA = {
       material: 'Cuero plena flor curtido vegetal · elástico reforzado · cosido Blake', sizes: SIZES_COL,
       desc: 'Cuero plena flor con elástico reforzado. Se calza en un segundo, se nota toda la noche.',
       c: { upper: '#4a3022', panel: '#1a1a1a', accent: '#c08a5a', mid: '#1f1f1f', sole: '#111111' } },
-    { id: 'a3', name: 'Asfalto 01 Low', cat: 'tenis', type: 'low', price: 369900, was: 459900, colorway: 'Carbón / Ácido', rating: 4.8, reviews: 312, stock: 4, active: true,
+    { id: 'a3', name: 'Zypher 01 Low', cat: 'tenis', type: 'low', price: 369900, was: 459900, colorway: 'Carbón / Ácido', rating: 4.8, reviews: 312, stock: 4, active: true,
       material: 'Cuero plena flor · forro textil · suela vulcanizada de caucho', sizes: SIZES_COL,
       desc: 'Low-top de cuero con plantilla de memoria y suela vulcanizada. El par de todos los días.',
       c: { upper: '#2a2a2a', panel: '#1b1b1b', accent: '#c8ff3d', mid: '#ece8e0', sole: '#111111', lace: '#111111' } },
@@ -47,7 +47,7 @@ const DEFAULT_DATA = {
       material: 'Malla técnica y gamuza · mediasuela EVA · suela de caucho', sizes: SIZES_COL,
       desc: 'Runner urbano con mediasuela EVA ultraliviana. Para caminar la ciudad entera.',
       c: { upper: '#a19c92', panel: '#75716a', accent: '#f1ede6', mid: '#f1ede6', sole: '#3a3a3a', lace: '#f1ede6' } },
-    { id: 'a5', name: 'Asfalto 02 High', cat: 'altos', type: 'high', price: 589900, colorway: 'Arena', rating: 4.7, reviews: 204, stock: 15, active: true,
+    { id: 'a5', name: 'Zypher 02 High', cat: 'altos', type: 'high', price: 589900, colorway: 'Arena', rating: 4.7, reviews: 204, stock: 15, active: true,
       material: 'Gamuza y cuero · collar acolchado · suela de caucho goma', sizes: SIZES_COL,
       desc: 'Bota de cancha con collar acolchado y parche de tobillo. Soporte y actitud.',
       c: { upper: '#d8c7a6', panel: '#bfa982', accent: '#3b2f22', mid: '#f4efe6', sole: '#7a4b25', lace: '#3b2f22' } },
@@ -75,7 +75,7 @@ const DEFAULT_DATA = {
 };
 
 const CATS = { todo: 'Todo', tenis: 'Tenis', altos: 'Altos', botas: 'Botas', chelsea: 'Chelsea', ofertas: 'Ofertas', favs: 'Favoritos' };
-const DATA_KEY = 'asfalto-data-v1';
+const DATA_KEY = 'zypher-data-v1';
 
 function loadData() {
   try {
@@ -89,4 +89,6 @@ function loadData() {
 function saveData(d) { localStorage.setItem(DATA_KEY, JSON.stringify(d)); }
 
 const money = (n) => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+// Logo: primera palabra grande, el resto en pequeño (ZYPHER sport shop).
+const logoHTML = (brand) => { const [first, ...rest] = String(brand).trim().split(/\s+/); return `${esc(first)}${rest.length ? `<span>${esc(rest.join(' '))}</span>` : ''}`; };
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));

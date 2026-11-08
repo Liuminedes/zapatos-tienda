@@ -23,8 +23,8 @@ const SALES = { // millones COP, ejemplo
   week: { labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], values: [3.2, 4.1, 2.6, 5.4, 4.8, 6.9, 5.7] },
   month: { labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'], values: [21.4, 26.8, 24.1, 32.7] },
 };
-const ORDERS_KEY = 'asfalto-orders-v2';
-const RAIL_KEY = 'asfalto-admin-rail';
+const ORDERS_KEY = 'zypher-orders-v1';
+const RAIL_KEY = 'zypher-admin-rail';
 const ls = {
   get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* demo */ } },
@@ -482,7 +482,7 @@ function fillSiteForms() {
 function updateMock() {
   const f = $('#lookForm').elements;
   $('.mock-site').style.setProperty('--pv', f.accent.value);
-  $('#mockBrand').textContent = f.brand.value || 'MARCA';
+  $('#mockBrand').textContent = (f.brand.value || 'MARCA').trim().split(/\s+/)[0];
   $$('#presets button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.accent.toLowerCase() === f.accent.value.toLowerCase()));
 }
 
@@ -534,7 +534,7 @@ $('#presets').addEventListener('click', (e) => {
 
 function applyBrand() {
   document.documentElement.style.setProperty('--accent', data.site.accent);
-  $('#brandLogo').innerHTML = `${esc(data.site.brand)}<span>®</span>`;
+  $('#brandLogo').innerHTML = logoHTML(data.site.brand);
   document.title = `Panel admin — ${data.site.brand}`;
 }
 

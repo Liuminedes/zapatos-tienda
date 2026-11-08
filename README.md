@@ -1,4 +1,4 @@
-# ASFALTO — Tienda de calzado urbano (demo)
+# Zypher Sport Shop — Tienda de calzado urbano (demo)
 
 Tienda en línea estática (HTML, CSS y JS puros, sin dependencias) con catálogo, ficha de producto, favoritos, carrito y un panel de administración de demostración. Precios en COP y tallas colombianas.
 
