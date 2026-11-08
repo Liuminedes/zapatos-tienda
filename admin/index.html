@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e0e0e">
   <title>Panel admin — ASFALTO</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,188 +11,338 @@
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <aside class="side">
-    <a href="../" class="logo" id="brandLogo">ASFALTO<span>®</span></a>
-    <span class="side-tag">Panel admin</span>
-    <nav class="side-nav" id="sideNav">
-      <button data-view="dash" aria-current="true"><i>◧</i>Resumen</button>
-      <button data-view="products"><i>◫</i>Productos</button>
-      <button data-view="orders"><i>☰</i>Pedidos</button>
-      <button data-view="content"><i>✎</i>Contenido</button>
-      <button data-view="look"><i>◐</i>Apariencia</button>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></symbol>
+      <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/><path d="M9 8h6M9 12h6"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13 7l4 4"/></symbol>
+      <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 004-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></symbol>
+      <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9M4 9h16v11H4zM4 9a2.7 2.7 0 005.3 0 2.7 2.7 0 005.4 0A2.7 2.7 0 0020 9"/><path d="M10 20v-5h4v5"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4l2-2zM10 20a2 2 0 004 0"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+      <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V9M7 14l5-5 5 5M5 4h14"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 108-8H8"/><path d="M10 1L7 4l3 3"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.01"/></symbol>
+      <symbol id="i-collapse" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M15 10l-2 2 2 2"/></symbol>
+      <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 10v4M18 10v4"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 00-1-1H5a1 1 0 00-1 1v10a1 1 0 001 1h3"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Sidebar: completa en PC, riel de íconos en tablet, cajón deslizable en móvil -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegación del panel">
+    <div class="sb-brand">
+      <a href="../" class="logo" id="brandLogo">ASFALTO<span>®</span></a>
+      <span class="sb-badge">Admin</span>
+      <button class="icon-btn sb-close" data-drawer="close" aria-label="Cerrar menú"><svg><use href="#i-x"/></svg></button>
+    </div>
+
+    <nav class="sb-nav" id="sideNav">
+      <p class="sb-label">General</p>
+      <button data-view="dash" title="Resumen"><svg><use href="#i-dash"/></svg><span>Resumen</span></button>
+      <button data-view="orders" title="Pedidos"><svg><use href="#i-receipt"/></svg><span>Pedidos</span><em class="count" id="navOrders"></em></button>
+      <p class="sb-label">Catálogo</p>
+      <button data-view="products" title="Productos"><svg><use href="#i-box"/></svg><span>Productos</span><em class="count warn" id="navStock"></em></button>
+      <p class="sb-label">Tienda</p>
+      <button data-view="content" title="Contenido"><svg><use href="#i-edit"/></svg><span>Contenido</span></button>
+      <button data-view="look" title="Apariencia"><svg><use href="#i-palette"/></svg><span>Apariencia</span></button>
     </nav>
-    <div class="side-foot">
-      <a href="../" target="_blank" class="btn btn-ghost full">Ver tienda ↗</a>
-      <p>Demo sin login: los cambios se guardan en este navegador.</p>
+
+    <div class="sb-foot">
+      <a href="../" target="_blank" class="sb-store" title="Ver tienda">
+        <svg><use href="#i-store"/></svg>
+        <span><b>Ver tienda</b><small>Abre en otra pestaña</small></span>
+        <svg class="ext"><use href="#i-external"/></svg>
+      </a>
+      <div class="sb-user">
+        <span class="avatar">AD</span>
+        <span><b>Admin demo</b><small>Sin login · datos locales</small></span>
+      </div>
+      <button class="sb-collapse" id="collapseBtn" title="Contraer menú"><svg><use href="#i-collapse"/></svg><span>Contraer</span></button>
     </div>
   </aside>
+  <div class="drawer-scrim" id="drawerScrim" data-drawer="close"></div>
 
-  <div class="main">
-    <header class="top">
-      <h1 id="viewTitle">Resumen</h1>
-      <div class="top-actions">
-        <button class="btn btn-ghost" id="exportBtn">Exportar JSON</button>
-        <label class="btn btn-ghost">Importar JSON<input type="file" id="importFile" accept="application/json" hidden></label>
-        <button class="btn btn-ghost danger" id="resetBtn">Restablecer demo</button>
+  <div class="shell">
+    <header class="topbar">
+      <button class="icon-btn hamburger" data-drawer="open" aria-label="Abrir menú"><svg><use href="#i-menu"/></svg></button>
+      <div class="tb-title">
+        <h1 id="viewTitle">Resumen</h1>
+        <p id="viewSub"></p>
+      </div>
+      <label class="tb-search">
+        <svg><use href="#i-search"/></svg>
+        <span class="sr-only">Buscar productos</span>
+        <input id="globalSearch" type="search" placeholder="Buscar productos…" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <div class="tb-actions">
+        <div class="pop-wrap">
+          <button class="icon-btn" id="bellBtn" aria-label="Notificaciones" aria-expanded="false" aria-controls="bellPop"><svg><use href="#i-bell"/></svg><i class="ping" id="bellDot" hidden></i></button>
+          <div class="popover" id="bellPop" hidden>
+            <p class="pop-title">Notificaciones</p>
+            <ul id="bellList"></ul>
+          </div>
+        </div>
+        <div class="pop-wrap">
+          <button class="icon-btn" id="moreBtn" aria-label="Más acciones" aria-expanded="false" aria-controls="morePop"><svg><use href="#i-more"/></svg></button>
+          <div class="popover menu" id="morePop" hidden>
+            <button id="exportBtn"><svg><use href="#i-download"/></svg>Exportar datos (JSON)</button>
+            <label><svg><use href="#i-upload"/></svg>Importar datos (JSON)<input type="file" id="importFile" accept="application/json" hidden></label>
+            <hr>
+            <button id="resetBtn" class="danger"><svg><use href="#i-reset"/></svg>Restablecer demo</button>
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Resumen -->
-    <section class="view" id="view-dash">
-      <div class="kpis" id="kpis"></div>
-      <div class="two">
-        <div class="panel">
-          <div class="panel-head"><h2>Ventas últimos 7 días</h2><span class="muted small">Datos de ejemplo</span></div>
-          <div class="bars" id="salesChart"></div>
+    <main class="content" id="content">
+      <!-- Resumen -->
+      <section class="view" id="view-dash">
+        <div class="kpis" id="kpis"></div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head">
+              <div><h2>Ventas</h2><p class="muted small">Datos de ejemplo · millones COP</p></div>
+              <div class="seg" id="rangeSeg" role="tablist">
+                <button role="tab" aria-selected="true" data-range="week">7 días</button>
+                <button role="tab" aria-selected="false" data-range="month">4 semanas</button>
+              </div>
+            </div>
+            <div class="chart" id="salesChart"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Por categoría</h2><p class="muted small">Participación en ventas</p></div></div>
+            <ul class="cat-bars" id="catBars"></ul>
+          </div>
         </div>
-        <div class="panel">
-          <div class="panel-head"><h2>Stock bajo</h2><button class="link" data-view="products">Ver todo</button></div>
-          <ul class="mini-list" id="lowStock"></ul>
+        <div class="grid-2 rev">
+          <div class="card flush">
+            <div class="card-head pad"><div><h2>Últimos pedidos</h2></div><button class="btn btn-soft sm" data-view="orders">Ver todos</button></div>
+            <div class="table-wrap"><table class="table" id="recentOrders"></table></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Stock bajo</h2><p class="muted small">5 pares o menos</p></div><button class="btn btn-soft sm" data-view="products">Gestionar</button></div>
+            <ul class="mini-list" id="lowStock"></ul>
+          </div>
         </div>
+      </section>
+
+      <!-- Productos -->
+      <section class="view" id="view-products" hidden>
+        <div class="toolbar">
+          <div class="seg scroll" id="catSeg" role="tablist"></div>
+          <div class="toolbar-end">
+            <label class="field-icon">
+              <svg><use href="#i-search"/></svg>
+              <span class="sr-only">Buscar</span>
+              <input type="search" id="pSearch" placeholder="Nombre, color o material">
+            </label>
+            <button class="btn btn-primary" id="newProduct"><svg><use href="#i-plus"/></svg><span>Nuevo producto</span></button>
+          </div>
+        </div>
+        <div class="card flush"><div class="table-wrap"><table class="table products" id="productTable"></table></div></div>
+      </section>
+
+      <!-- Pedidos -->
+      <section class="view" id="view-orders" hidden>
+        <div class="toolbar">
+          <div class="seg scroll" id="statusSeg" role="tablist"></div>
+        </div>
+        <div class="card flush"><div class="table-wrap"><table class="table orders" id="orderTable"></table></div></div>
+        <p class="muted small note">Pedidos de demostración. Con una pasarela real (Wompi, PayU, Mercado Pago) llegarían aquí automáticamente.</p>
+      </section>
+
+      <!-- Contenido -->
+      <section class="view" id="view-content" hidden>
+        <form class="stack" id="contentForm" data-dirty-form>
+          <div class="card form-card">
+            <div class="fc-head"><h2>Barra de anuncio</h2><p>El mensaje que aparece sobre el menú de la tienda.</p></div>
+            <div class="fc-body">
+              <label>Texto<input name="announce"></label>
+              <div class="row">
+                <label>Envío gratis desde (COP)<input name="freeShip" type="number" min="0" step="1000" inputmode="numeric"></label>
+                <label>Cuotas sin interés<input name="installments" type="number" min="1" max="36" inputmode="numeric"></label>
+              </div>
+            </div>
+          </div>
+          <div class="card form-card">
+            <div class="fc-head"><h2>Portada</h2><p>Lo primero que ve el cliente al entrar.</p></div>
+            <div class="fc-body">
+              <label>Texto pequeño superior<input name="heroEyebrow"></label>
+              <label>Título <small>Encierra una palabra entre *asteriscos* para resaltarla</small><input name="heroTitle"></label>
+              <label>Descripción<textarea name="heroLead" rows="3"></textarea></label>
+              <label>Producto destacado<select name="heroProduct" class="product-select"></select></label>
+            </div>
+          </div>
+          <div class="card form-card">
+            <div class="fc-head"><h2>Bloque editorial</h2><p>La sección clara para contar la historia de un producto.</p></div>
+            <div class="fc-body">
+              <label>Texto pequeño superior<input name="editorialEyebrow"></label>
+              <label>Título<input name="editorialTitle"></label>
+              <label>Texto<textarea name="editorialText" rows="3"></textarea></label>
+              <label>Producto<select name="editorialProduct" class="product-select"></select></label>
+            </div>
+          </div>
+          <div class="card form-card">
+            <div class="fc-head"><h2>Footer</h2><p>Descripción corta de la marca al final de la página.</p></div>
+            <div class="fc-body"><label>Descripción<textarea name="footerText" rows="2"></textarea></label></div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Apariencia -->
+      <section class="view" id="view-look" hidden>
+        <form class="look" id="lookForm" data-dirty-form>
+          <div class="stack">
+            <div class="card form-card">
+              <div class="fc-head"><h2>Marca</h2><p>Se usa en el logo, la pestaña del navegador y el panel.</p></div>
+              <div class="fc-body"><label>Nombre de la tienda<input name="brand" required maxlength="24"></label></div>
+            </div>
+            <div class="card form-card">
+              <div class="fc-head"><h2>Color de acento</h2><p>Botones, barra de anuncio, ofertas y detalles.</p></div>
+              <div class="fc-body">
+                <div class="accent-row">
+                  <input type="color" name="accent" id="accentInput" aria-label="Color personalizado">
+                  <div class="presets" id="presets"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mock" id="mock">
+            <p class="muted small">Vista previa</p>
+            <div class="mock-site">
+              <div class="mock-bar">Envío gratis desde $300.000</div>
+              <div class="mock-nav"><b id="mockBrand">ASFALTO</b><i></i><i></i><i></i></div>
+              <div class="mock-hero">
+                <div><span class="mock-h">CAMINA LA CIUDAD A <em>TU</em> RITMO.</span><span class="mock-btn">Comprar ahora</span></div>
+                <div class="mock-disc"></div>
+              </div>
+              <div class="mock-cards"><span><em>-20%</em></span><span></span><span></span></div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Barra de cambios sin guardar -->
+    <div class="savebar" id="savebar" hidden>
+      <span><i class="pulse"></i>Tienes cambios sin guardar</span>
+      <div>
+        <button class="btn btn-soft" id="discardBtn">Descartar</button>
+        <button class="btn btn-primary" id="saveBtn">Guardar cambios</button>
       </div>
-      <div class="panel">
-        <div class="panel-head"><h2>Últimos pedidos</h2><button class="link" data-view="orders">Ver todos</button></div>
-        <div class="table-wrap"><table class="table" id="recentOrders"></table></div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Productos -->
-    <section class="view" id="view-products" hidden>
-      <div class="toolbar">
-        <input type="search" id="pSearch" placeholder="Buscar producto, color o material">
-        <select id="pCatFilter"><option value="">Todas las categorías</option></select>
-        <button class="btn btn-primary" id="newProduct">+ Nuevo producto</button>
-      </div>
-      <div class="panel flush"><div class="table-wrap"><table class="table" id="productTable"></table></div></div>
-    </section>
-
-    <!-- Pedidos -->
-    <section class="view" id="view-orders" hidden>
-      <div class="panel flush"><div class="table-wrap"><table class="table" id="orderTable"></table></div></div>
-      <p class="muted small note">Pedidos de demostración. Con una pasarela real (Wompi, PayU, Mercado Pago) llegarían aquí automáticamente.</p>
-    </section>
-
-    <!-- Contenido -->
-    <section class="view" id="view-content" hidden>
-      <form class="panel form" id="contentForm">
-        <h2>Barra de anuncio</h2>
-        <label>Texto<input name="announce"></label>
-        <div class="row">
-          <label>Envío gratis desde (COP)<input name="freeShip" type="number" min="0" step="1000"></label>
-          <label>Cuotas sin interés<input name="installments" type="number" min="1" max="36"></label>
-        </div>
-
-        <h2>Portada (hero)</h2>
-        <label>Texto pequeño superior<input name="heroEyebrow"></label>
-        <label>Título <small>Encierra una palabra entre *asteriscos* para resaltarla</small><input name="heroTitle"></label>
-        <label>Descripción<textarea name="heroLead" rows="3"></textarea></label>
-        <label>Producto destacado<select name="heroProduct" class="product-select"></select></label>
-
-        <h2>Bloque editorial</h2>
-        <label>Texto pequeño superior<input name="editorialEyebrow"></label>
-        <label>Título<input name="editorialTitle"></label>
-        <label>Texto<textarea name="editorialText" rows="3"></textarea></label>
-        <label>Producto<select name="editorialProduct" class="product-select"></select></label>
-
-        <h2>Footer</h2>
-        <label>Descripción de marca<textarea name="footerText" rows="2"></textarea></label>
-        <div class="form-actions"><button class="btn btn-primary">Guardar contenido</button></div>
-      </form>
-    </section>
-
-    <!-- Apariencia -->
-    <section class="view" id="view-look" hidden>
-      <form class="panel form" id="lookForm">
-        <h2>Marca</h2>
-        <label>Nombre de la tienda<input name="brand" required></label>
-        <h2>Color de acento</h2>
-        <div class="accent-row">
-          <input type="color" name="accent" id="accentInput">
-          <div class="presets" id="presets"></div>
-        </div>
-        <div class="accent-preview" id="accentPreview">
-          <span class="ap-bar">Barra de anuncio</span>
-          <span class="ap-btn">Comprar ahora</span>
-          <span class="ap-badge">-20%</span>
-        </div>
-        <div class="form-actions"><button class="btn btn-primary">Guardar apariencia</button></div>
-      </form>
-    </section>
+    <!-- Navegación inferior en móvil -->
+    <nav class="tabbar" id="tabbar" aria-label="Navegación rápida">
+      <button data-view="dash"><svg><use href="#i-dash"/></svg><span>Resumen</span></button>
+      <button data-view="products"><svg><use href="#i-box"/></svg><span>Productos</span></button>
+      <button class="tab-add" id="tabAdd" aria-label="Nuevo producto"><svg><use href="#i-plus"/></svg></button>
+      <button data-view="orders"><svg><use href="#i-receipt"/></svg><span>Pedidos</span></button>
+      <button data-drawer="open"><svg><use href="#i-menu"/></svg><span>Más</span></button>
+    </nav>
   </div>
 
-  <!-- Editor de producto -->
-  <dialog class="editor" id="editor">
-    <form id="productForm">
-      <header class="editor-head">
-        <h2 id="editorTitle">Editar producto</h2>
-        <button type="button" class="x" data-close aria-label="Cerrar">✕</button>
+  <!-- Editor de producto (modal en PC, hoja deslizable en móvil) -->
+  <dialog class="modal editor" id="editor" aria-labelledby="editorTitle">
+    <form id="productForm" novalidate>
+      <header class="m-head">
+        <div><h2 id="editorTitle">Editar producto</h2><p class="muted small" id="editorSub"></p></div>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar"><svg><use href="#i-x"/></svg></button>
       </header>
-      <div class="editor-body">
-        <div class="editor-preview">
+      <div class="m-tabs seg" role="tablist" id="editorTabs">
+        <button type="button" role="tab" aria-selected="true" data-tab="info">Información</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="stock">Precio y stock</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="media">Imagen</button>
+      </div>
+      <div class="m-body">
+        <aside class="ed-preview">
           <div class="preview-art" id="previewArt"></div>
-          <p class="preview-name" id="previewName"></p>
-          <p class="preview-price" id="previewPrice"></p>
-          <label class="switch"><input type="checkbox" name="active"> Visible en la tienda</label>
-        </div>
-        <div class="editor-fields">
-          <fieldset>
-            <legend>Información</legend>
+          <div class="ed-meta">
+            <p class="preview-name" id="previewName"></p>
+            <p class="preview-price" id="previewPrice"></p>
+            <label class="switch"><input type="checkbox" name="active"><i></i><span>Visible en la tienda</span></label>
+          </div>
+        </aside>
+        <div class="ed-fields">
+          <section class="ed-tab" data-panel="info">
             <div class="row">
-              <label>Nombre<input name="name" required></label>
-              <label>Color / variante<input name="colorway" required></label>
+              <label>Nombre<input name="name" required placeholder="Asfalto 03 Low"></label>
+              <label>Color / variante<input name="colorway" required placeholder="Negro / Blanco"></label>
             </div>
             <div class="row">
               <label>Categoría<select name="cat"><option value="tenis">Tenis</option><option value="altos">Altos</option><option value="botas">Botas</option><option value="chelsea">Chelsea</option></select></label>
               <label>Etiqueta <small>opcional</small><input name="tag" placeholder="Nuevo, Drop 07…"></label>
             </div>
-            <label>Descripción<textarea name="desc" rows="3"></textarea></label>
+            <label>Descripción<textarea name="desc" rows="3" placeholder="Cuenta qué hace especial este par"></textarea></label>
             <label>Materiales<input name="material" placeholder="Cuero plena flor · suela de caucho"></label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Precio e inventario</legend>
+            <div class="row">
+              <label>Calificación<input name="rating" type="number" min="0" max="5" step="0.1" inputmode="decimal"></label>
+              <label>Nº de reseñas<input name="reviews" type="number" min="0" inputmode="numeric"></label>
+            </div>
+          </section>
+          <section class="ed-tab" data-panel="stock" hidden>
             <div class="row three">
-              <label>Precio (COP)<input name="price" type="number" min="0" step="100" required></label>
-              <label>Precio anterior <small>oferta</small><input name="was" type="number" min="0" step="100"></label>
-              <label>Stock<input name="stock" type="number" min="0" required></label>
+              <label>Precio (COP)<input name="price" type="number" min="0" step="100" required inputmode="numeric"></label>
+              <label>Precio anterior <small>oferta</small><input name="was" type="number" min="0" step="100" inputmode="numeric"></label>
+              <label>Stock<input name="stock" type="number" min="0" required inputmode="numeric"></label>
             </div>
-            <p class="field-label">Tallas disponibles (COL)</p>
-            <div class="size-picks" id="sizePicks"></div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Imagen</legend>
-            <div class="row">
-              <label>Subir foto <small>PNG sin fondo ideal</small><input type="file" id="imgFile" accept="image/*"></label>
-              <label>…o URL de imagen<input name="img" placeholder="https://…/zapato.png"></label>
+            <div class="field">
+              <div class="field-row"><span class="field-label">Tallas disponibles (COL)</span><span><button type="button" class="link" data-sizes="all">Todas</button> · <button type="button" class="link" data-sizes="none">Ninguna</button></span></div>
+              <div class="size-picks" id="sizePicks"></div>
             </div>
+          </section>
+          <section class="ed-tab" data-panel="media" hidden>
+            <label class="dropzone" id="dropzone">
+              <svg><use href="#i-image"/></svg>
+              <b>Arrastra una foto o toca para subirla</b>
+              <small>PNG sin fondo ideal · se optimiza automáticamente</small>
+              <input type="file" id="imgFile" accept="image/*">
+            </label>
+            <label>…o pega la URL de una imagen<input name="img" placeholder="https://…/zapato.png" inputmode="url"></label>
             <button type="button" class="link" id="clearImg">Quitar imagen y usar ilustración</button>
-            <div class="row">
-              <label>Silueta de ilustración<select name="type"><option value="low">Tenis bajo</option><option value="high">Tenis alto</option><option value="boot">Bota</option><option value="chelsea">Chelsea</option></select></label>
+            <label>Silueta de la ilustración<select name="type"><option value="low">Tenis bajo</option><option value="high">Tenis alto</option><option value="boot">Bota</option><option value="chelsea">Chelsea</option></select></label>
+            <div class="field">
+              <span class="field-label">Colores de la ilustración</span>
+              <div class="colors" id="colorPicks"></div>
             </div>
-            <p class="field-label">Colores de la ilustración</p>
-            <div class="colors" id="colorPicks"></div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Reseñas</legend>
-            <div class="row">
-              <label>Calificación<input name="rating" type="number" min="0" max="5" step="0.1"></label>
-              <label>Nº de reseñas<input name="reviews" type="number" min="0"></label>
-            </div>
-          </fieldset>
+          </section>
         </div>
       </div>
-      <footer class="editor-foot">
-        <button type="button" class="btn btn-ghost danger" id="deleteProduct">Eliminar</button>
+      <footer class="m-foot">
+        <button type="button" class="btn btn-soft danger" id="deleteProduct"><svg><use href="#i-trash"/></svg><span>Eliminar</span></button>
         <span class="spacer"></span>
-        <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
-        <button class="btn btn-primary">Guardar producto</button>
+        <button type="button" class="btn btn-soft" data-close>Cancelar</button>
+        <button class="btn btn-primary">Guardar</button>
       </footer>
     </form>
   </dialog>
 
-  <div class="toast" id="toast" role="status"></div>
+  <!-- Confirmación -->
+  <dialog class="modal confirm" id="confirmDlg" aria-labelledby="confirmTitle">
+    <div class="cf-icon"><svg><use href="#i-alert"/></svg></div>
+    <h2 id="confirmTitle"></h2>
+    <p id="confirmText" class="muted"></p>
+    <div class="cf-actions">
+      <button class="btn btn-soft" value="cancel" id="confirmNo">Cancelar</button>
+      <button class="btn btn-danger" value="ok" id="confirmYes">Confirmar</button>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
 
   <script src="../data.js"></script>
   <script src="../shoes.js"></script>
