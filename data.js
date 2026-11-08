@@ -89,6 +89,10 @@ function loadData() {
 function saveData(d) { localStorage.setItem(DATA_KEY, JSON.stringify(d)); }
 
 const money = (n) => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
-// Logo: primera palabra grande, el resto en pequeño (ZYPHER sport shop).
-const logoHTML = (brand) => { const [first, ...rest] = String(brand).trim().split(/\s+/); return `${esc(first)}${rest.length ? `<span>${esc(rest.join(' '))}</span>` : ''}`; };
+// Logo: isotipo (Z itálica cuya base es una suela con tacos + estelas de viento) y logotipo con el nombre de la marca.
+const LOGO_MARK = `<g class="zbody">  <path class="ink" d="M20 12H56L52 22H16Z"/>  <path class="ink" d="M40 22H52L28 42H16Z"/>  <path class="acc" d="M12 42H29L25 52H8Z"/>  <path class="acc" d="M31 42H39L35 52H27Z"/>  <path class="acc" d="M41 42H48L44 52H37Z"/> </g> <path class="streak" d="M19 27H30"/> <path class="streak" d="M11 32H24"/> <path class="streak" d="M4 37H18"/>`;
+const logoHTML = (brand) => {
+  const [first, ...rest] = String(brand).trim().split(/\s+/);
+  return `<svg class="mark" viewBox="0 0 64 64" role="img" aria-hidden="true">${LOGO_MARK}</svg><span class="wm"><b>${esc(first)}</b>${rest.length ? `<small>${esc(rest.join(' '))}</small>` : ''}</span>`;
+};
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));

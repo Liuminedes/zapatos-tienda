@@ -1,0 +1,16 @@
+/* Logo Zypher: isotipo (Z con suela y estelas de viento) + logotipo. Compartido por tienda y admin. */
+.logo { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); white-space: nowrap; text-transform: uppercase; text-decoration: none; }
+.logo .mark { width: 40px; height: 40px; flex: none; overflow: visible; }
+.mark .ink { fill: currentColor; }
+.mark .acc { fill: var(--accent); }
+.mark .streak { fill: none; stroke: var(--accent); stroke-width: 3.4; stroke-linecap: round; transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.mark .streak:nth-of-type(2) { transition-delay: .04s; }
+.mark .streak:nth-of-type(3) { transition-delay: .08s; }
+.mark .zbody { transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.logo:hover .mark .streak { transform: translateX(-4px); }
+.logo:hover .mark .zbody { transform: translateX(1.5px); }
+.wm { display: grid; justify-items: start; line-height: 1; }
+.wm b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: .035em; transform: skewX(-9deg); transform-origin: left bottom; }
+.wm small { display: flex; align-items: center; gap: 6px; margin-top: 5px; font-family: var(--body); font-size: 8.5px; font-weight: 700; letter-spacing: .46em; color: var(--accent); }
+.wm small::before { content: ''; width: 12px; height: 2px; border-radius: 2px; background: currentColor; }
+@media (prefers-reduced-motion: reduce) { .mark .streak, .mark .zbody { transition: none; } }

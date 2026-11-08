@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@700&amp;display=swap');</style>
+  <g transform="translate(0 4)">
+  <g>
+    <path fill="#f1ede6" d="M20 12H56L52 22H16Z"/>
+    <path fill="#f1ede6" d="M40 22H52L28 42H16Z"/>
+    <path fill="#ff4d1a" d="M12 42H29L25 52H8Z"/>
+    <path fill="#ff4d1a" d="M31 42H39L35 52H27Z"/>
+    <path fill="#ff4d1a" d="M41 42H48L44 52H37Z"/>
+  </g>
+  <path fill="none" stroke="#ff4d1a" stroke-width="3.4" stroke-linecap="round" d="M19 27H30"/>
+  <path fill="none" stroke="#ff4d1a" stroke-width="3.4" stroke-linecap="round" d="M11 32H24"/>
+  <path fill="none" stroke="#ff4d1a" stroke-width="3.4" stroke-linecap="round" d="M4 37H18"/>
+  </g>
+  <text x="80" y="44" transform="skewX(-9)" transform-origin="80 44" font-family="'Archivo Black', Impact, sans-serif" font-size="38" letter-spacing="1.4" fill="#f1ede6">ZYPHER</text>
+  <rect x="81" y="54" width="18" height="3" rx="1.5" fill="#ff4d1a"/>
+  <text x="106" y="58" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="11" letter-spacing="5" fill="#ff4d1a">SPORT SHOP</text>
+</svg>
